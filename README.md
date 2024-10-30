@@ -10,12 +10,9 @@ Then visit http://localhost:8000
 (Note: docker needed on the computer)
 
 
+## Setup without docker
 
-## OR
-
-
-
-## Setting up the backend manually
+### Setting up the backend manually
 
 ```shell
 cd backend
@@ -27,7 +24,7 @@ python3 main.py
 
 Then visit http://localhost:8000
 
-## Setting up the frontend manually
+### Setting up the frontend manually
 
 ```shell
 cd frontend
