@@ -9,6 +9,12 @@ Then visit http://localhost:8000
 
 (Note: docker needed on the computer)
 
+
+
+##OR
+
+
+
 ## Setting up the backend manually
 
 ```shell
