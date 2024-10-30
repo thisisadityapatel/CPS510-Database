@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  backend:
+    build: ./backend
+    container_name: backend_api_platform
+    ports:
+      - '8000:8000'
+  frontend:
+    build: ./frontend
+    container_name: frontend_microservice
+    ports:
+      - '3000:3000'
