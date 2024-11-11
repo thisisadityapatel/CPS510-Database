@@ -28,8 +28,8 @@ Then visit http://localhost:8000
 
 ```shell
 cd frontend
-yarn install
-yarn run dev
+npm install
+npm run dev
 ```
 
 Then visit http://localhost:5173
