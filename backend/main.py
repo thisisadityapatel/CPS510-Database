@@ -57,7 +57,7 @@ def close_ssh():
 def run_custom_query(custom_query):
     try:
         command = f'cd cps510 && echo "{custom_query}" > custom_query.sql && bash custom_query.sh'
-        stdout, stderr = ssh_client.exec_command(command)
+        stdin, stdout, stderr = ssh_client.exec_command(command)
         result = stdout.read().decode() + stderr.read().decode()
         return (result + "\n")
     except Exception as e:
@@ -65,14 +65,22 @@ def run_custom_query(custom_query):
 
 # Function to run scripts via SSH
 def run_script_via_ssh(script_name):
+    print('test1')
     try:
+        print('test2')
+
         command = f'cd cps510 && bash {script_name}'
-        stdout, stderr = ssh_client.exec_command(command)
-        result = stdout.read().decode() + stderr.read().decode()
+        stdin, stdout, stderr = ssh_client.exec_command(command)
+        exit_status = stdout.channel.recv_exit_status()  # Block until done
+        result = stdout.read().decode()
+        error = stderr.read().decode()
+        if exit_status != 0:
+            return f"Error: {error.strip()}"
         print(result)
         return result
     except Exception as e:
         error = ("SSH Error: " + str(e) + "\n")
+        print(error)
         return error
 
 @app.get("/")
