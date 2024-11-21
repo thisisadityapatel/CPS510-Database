@@ -23,12 +23,6 @@ class LoginRequest(BaseModel):
 class CustomQueryRequest(BaseModel):
     custom_query: str
 
-# Oracle Database Connection Details
-oracle_user = "oracle12c.scs.ryerson.ca"
-oracle_password = "db_password"
-oracle_service_name = "orcl12c"
-local_port = 1521
-
 # SSH Details
 ssh_hostname = "moon.cs.ryerson.ca"
 ssh_username = "username"
@@ -38,23 +32,12 @@ remote_port = 22
 ssh_client = paramiko.SSHClient()
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-
-def upload_scripts():
-    try:
-        c1 = f'cd cps510 && echo > create_tables.sh'
-        stdin, stdout, stderr = ssh_client.exec_command(c1)
-        result = stdout.read().decode() + stderr.read().decode()
-        return (result + "\n")
-    except Exception as e:
-        return ("SSH Error: " + str(e) + "\n")
-    
 # Function to set up SSH tunnel
 def create_ssh_tunnel(username, password):
     ssh_username = username
     ssh_password = password
     try:
         ssh_client.connect(ssh_hostname, username=ssh_username, password=ssh_password)
-        #upload_scripts()
         return "Connection Established"
     except Exception as e:
         error = ("SSH Tunnel Error: " + str(e) + "\n")
@@ -91,7 +74,6 @@ def run_script_via_ssh(script_name):
         return result
     except Exception as e:
         error = ("SSH Error: " + str(e) + "\n")
-        print(error)
         return error
 
 @app.get("/")
@@ -105,9 +87,7 @@ def login(request: LoginRequest):
     username = request.username
     password = request.password
     x = create_ssh_tunnel(username, password)
-    # Logic to query tables using username and password
-    print(x)
-    # Logic to drop tables
+    
     return {"message": "Logged in successfully."}
 
 @app.get("/logout")
@@ -154,14 +134,10 @@ def query_tables():
 # Endpoint to run a custom query
 @app.post("/custom-query")
 def query_tables(request: CustomQueryRequest):
-    print('test')
     custom_query = request.custom_query
-    print(custom_query)
     try:
         custom_query = request.custom_query
-        output = run_custom_query(custom_query)    
-        print(custom_query)
-        print(output)
+        output = run_custom_query(custom_query)
         return {"message": output}
     except Exception as e:
         return {"message": "Error: " + str(e)}
