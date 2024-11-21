@@ -38,12 +38,23 @@ remote_port = 22
 ssh_client = paramiko.SSHClient()
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
+
+def upload_scripts():
+    try:
+        c1 = f'cd cps510 && echo > create_tables.sh'
+        stdin, stdout, stderr = ssh_client.exec_command(c1)
+        result = stdout.read().decode() + stderr.read().decode()
+        return (result + "\n")
+    except Exception as e:
+        return ("SSH Error: " + str(e) + "\n")
+    
 # Function to set up SSH tunnel
 def create_ssh_tunnel(username, password):
     ssh_username = username
     ssh_password = password
     try:
         ssh_client.connect(ssh_hostname, username=ssh_username, password=ssh_password)
+        #upload_scripts()
         return "Connection Established"
     except Exception as e:
         error = ("SSH Tunnel Error: " + str(e) + "\n")
@@ -58,17 +69,18 @@ def run_custom_query(custom_query):
     try:
         command = f'cd cps510 && echo "{custom_query}" > custom_query.sql && bash custom_query.sh'
         stdin, stdout, stderr = ssh_client.exec_command(command)
-        result = stdout.read().decode() + stderr.read().decode()
-        return (result + "\n")
+        exit_status = stdout.channel.recv_exit_status()  # Block until done
+        result = stdout.read().decode()
+        error = stderr.read().decode()
+        if exit_status != 0:
+            return f"Error: {error.strip()}"
+        return result
     except Exception as e:
         return ("SSH Error: " + str(e) + "\n")
 
 # Function to run scripts via SSH
 def run_script_via_ssh(script_name):
-    print('test1')
     try:
-        print('test2')
-
         command = f'cd cps510 && bash {script_name}'
         stdin, stdout, stderr = ssh_client.exec_command(command)
         exit_status = stdout.channel.recv_exit_status()  # Block until done
@@ -76,7 +88,6 @@ def run_script_via_ssh(script_name):
         error = stderr.read().decode()
         if exit_status != 0:
             return f"Error: {error.strip()}"
-        print(result)
         return result
     except Exception as e:
         error = ("SSH Error: " + str(e) + "\n")
@@ -107,39 +118,50 @@ def logout():
 # Endpoint to drop tables
 @app.get("/drop-tables")
 def drop_tables():
-    # Logic to drop tables
-    run_script_via_ssh("drop_tables.sh")
-
-    return {"message": "Tables dropped successfully."}
+    try:
+        output = run_script_via_ssh("drop_tables.sh")
+        return {"message": output}
+    except Exception as e:
+        return {"message": "Error: " + str(e)}
 
 # Endpoint to create tables
 @app.get("/create-tables")
 def create_tables():
-    run_script_via_ssh("create_tables.sh")
-    # Logic to create tables
-    return {"message": "Tables created successfully."}
+    try:
+        output = run_script_via_ssh("create_tables_main.sh")
+        return {"message": output}
+    except Exception as e:
+        return {"message": "Error: " + str(e)}
 
 # Endpoint to populate tables
 @app.get("/populate-tables")
 def populate_tables():
-    # Logic to populate tables
-    run_script_via_ssh("populate_tables.sh")
-    return {"message": "Tables populated successfully."}
+    try:
+        output = run_script_via_ssh("populate_tables.sh")
+        return {"message": output}
+    except Exception as e:
+        return {"message": "Error: " + str(e)}
 
 # Endpoint to query tables
 @app.get("/query-tables")
 def query_tables():
-    run_script_via_ssh("queries.sh")
-    # Logic to query tables
-    return {"message": "test"}
+    try:
+        output = run_script_via_ssh("queries.sh")
+        return {"message": output}
+    except Exception as e:
+        return {"message": "Error: " + str(e)}
 
 # Endpoint to run a custom query
 @app.post("/custom-query")
 def query_tables(request: CustomQueryRequest):
-    custom_query = request.custom_query
-    run_custom_query(custom_query)    
-    # Logic to query tables
-    return {"message": "test"}
+    try:
+        custom_query = request.custom_query
+        output = run_custom_query(custom_query)    
+        print(custom_query)
+        print(output)
+        return {"message": output}
+    except Exception as e:
+        return {"message": "Error: " + str(e)}
     
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

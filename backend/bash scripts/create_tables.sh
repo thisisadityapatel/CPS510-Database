@@ -16,6 +16,7 @@ CREATE TABLE Cars (
     Availability CHAR(1) DEFAULT 'T'
 );
 
+
 CREATE TABLE Customers (
     CustomerID INT PRIMARY KEY NOT NULL,
     Name VARCHAR2(100) NOT NULL,
@@ -26,6 +27,7 @@ CREATE TABLE Customers (
     DateOfBirth DATE,
     LoyaltyMember CHAR(1) DEFAULT 'F'
 );
+
 
 CREATE TABLE Bookings (
     RentalID INT PRIMARY KEY NOT NULL,
@@ -44,32 +46,6 @@ CREATE TABLE Bookings (
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
-CREATE TABLE Bills (
-    BillID INT PRIMARY KEY NOT NULL,
-    CustomerID INT NOT NULL,
-    RentalID INT NOT NULL,
-    DueDate DATE NOT NULL,
-    IssueDate DATE NOT NULL,
-    Amount DECIMAL(10, 2) NOT NULL,
-    Status VARCHAR2(50) NOT NULL,
-    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
-    FOREIGN KEY (RentalID) REFERENCES Rentals(RentalID)
-);
-
-CREATE TABLE TicketBill (
-    BillID INT PRIMARY KEY NOT NULL,
-    CustomerID INT NOT NULL,
-    RentalID INT NOT NULL,
-    DueDate DATE NOT NULL,
-    IssueDate DATE NOT NULL,
-    Amount DECIMAL(10, 2) NOT NULL,
-    Status VARCHAR2(50) NOT NULL,
-    Description VARCHAR2(255) NOT NULL,
-    IncidentDate DATE NOT NULL,
-    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
-    FOREIGN KEY (RentalID) REFERENCES Rentals(RentalID)
-);
-
 CREATE TABLE Reviews (
     CarID INT NOT NULL,
     CustomerID INT NOT NULL,
@@ -80,6 +56,7 @@ CREATE TABLE Reviews (
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
+
 CREATE TABLE Maintenance (
     MaintenanceID INT PRIMARY KEY NOT NULL,
     CarID INT NOT NULL,
@@ -89,6 +66,7 @@ CREATE TABLE Maintenance (
     FOREIGN KEY (CarID) REFERENCES Cars(CarID)
 );
 
+
 CREATE TABLE Admin (
     EmployeeID INT PRIMARY KEY NOT NULL,
     Name VARCHAR2(100) NOT NULL,
@@ -96,6 +74,7 @@ CREATE TABLE Admin (
     Password VARCHAR2(255) NOT NULL,
     Email VARCHAR2(100) NOT NULL UNIQUE
 );
+
 
 exit;
 

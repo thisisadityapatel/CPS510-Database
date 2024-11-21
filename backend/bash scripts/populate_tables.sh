@@ -10,11 +10,13 @@ INSERT ALL
     INTO Cars (CarID, Make, Year, Model, CarType, Mileage, Colour, LicensePlate, RentalRate, Availability) VALUES (4, 'Tesla', 2023, 'Model 3', 'Electric', 10000, 'Blue', 'ABCD 123',100, 'F')
 SELECT * FROM dual;
 
+
 INSERT ALL
     INTO Customers (CustomerID, Name, Email, ContactNumber, LicenseNumber, Address, DateOfBirth, LoyaltyMember) VALUES (1, 'Lebron James', 'lebron@outlook.com', '1234567890', 'L1234 - 12345 - 12345', '321 Elm Street', TO_DATE('1984-12-30', 'YYYY-MM-DD'), 'F')
     INTO Customers (CustomerID, Name, Email, ContactNumber, LicenseNumber, Address, DateOfBirth, LoyaltyMember) VALUES (2, 'Stephen Curry', 'chef_curry@gmail.com', '3216540987', 'L4321 - 54321 - 54321', '123 Sesame Street', TO_DATE('1988-05-18', 'YYYY-MM-DD'), 'T')
     INTO Customers (CustomerID, Name, Email, ContactNumber, LicenseNumber, Address, DateOfBirth, LoyaltyMember) VALUES (3, 'Kevin Durant', 'slim-reaper@icloud.com', '0004567890', 'L147 - 14785 - 14785', '21 Jump Street', TO_DATE('1988-09-29', 'YYYY-MM-DD'), 'T')
 SELECT * FROM dual;
+
 
 INSERT ALL
     INTO Reviews (CarID, CustomerID, Feedback, Rating) VALUES (1, 1, 'Smooth drive, very comfortable.', 5)
@@ -23,11 +25,11 @@ INSERT ALL
     INTO Reviews (CarID, CustomerID, Feedback, Rating) VALUES (4, 1, 'Futuristic and smooth.', 5)
 SELECT * FROM dual;
 
+
 INSERT ALL
     INTO Maintenance (MaintenanceID, CarID, Description, Cost, Status) VALUES (1, 1, 'Oil change and tire rotation', 150.50, 'Completed')
     INTO Maintenance (MaintenanceID, CarID, Description, Cost, Status) VALUES (2, 2, 'Brake pad replacement', 200.00, 'In Progress')
     INTO Maintenance (MaintenanceID, CarID, Description, Cost, Status) VALUES (3, 3, 'Engine tune-up', 500.00, 'Pending')
-    INTO Maintenance (MaintenanceID, CarID, Description, Cost, Status) VALUES (4, 4, 'Battery check and software update', 250.00, 'Completed')
 SELECT * FROM dual;
 
 INSERT ALL
@@ -37,38 +39,41 @@ INSERT ALL
     INTO Admin (EmployeeID, Name, Username, Password, Email) VALUES (4, 'Bob Brown', 'bbrown', 'superpass', 'bbrown@admin.com')
 SELECT * FROM dual;
 
-INSERT ALL 
-    INTO Bookings (RentalID, CarID, CustomerID, BookingDate, MethodOfPayment, BookingStatus, StartDate, EndDate, PickupLocation, DropoffLocation, RentalPrice, RentalStatus) VALUES (1, 1, 1, TO_DATE('2024-09-01', 'YYYY-MM-DD'), 'Credit Card', 'Confirmed', TO_DATE('2024-09-05', 'YYYY-MM-DD'), TO_DATE('2024-09-12', 'YYYY-MM-DD'), '321 Elm Street', 'Main Office', 560.00, 'Complete') 
-    INTO Bookings (RentalID, CarID, CustomerID, BookingDate, MethodOfPayment, BookingStatus, StartDate, EndDate, PickupLocation, DropoffLocation, RentalPrice, RentalStatus) VALUES (2, 2, 2, TO_DATE('2024-09-10', 'YYYY-MM-DD'), 'Debit Card', 'Confirmed', TO_DATE('2024-09-15', 'YYYY-MM-DD'), TO_DATE('2024-09-20', 'YYYY-MM-DD'), '123 Sesame Street', 'Main Office', 490.00, 'Future') 
-    INTO Bookings (RentalID, CarID, CustomerID, BookingDate, MethodOfPayment, BookingStatus, StartDate, EndDate, PickupLocation, DropoffLocation, RentalPrice, RentalStatus) VALUES (3, 3, 3, TO_DATE('2024-09-20', 'YYYY-MM-DD'), 'Credit Card', 'Pending', TO_DATE('2024-09-25', 'YYYY-MM-DD'), TO_DATE('2024-09-30', 'YYYY-MM-DD'), '21 Jump Street', 'Main Office', 720.00, 'Future') 
-    INTO Bookings (RentalID, CarID, CustomerID, BookingDate, MethodOfPayment, BookingStatus, StartDate, EndDate, PickupLocation, DropoffLocation, RentalPrice, RentalStatus) VALUES (4, 1, 2, TO_DATE('2024-08-28', 'YYYY-MM-DD'), 'Credit Card', 'Confirmed', TO_DATE('2024-09-01', 'YYYY-MM-DD'), TO_DATE('2024-09-05', 'YYYY-MM-DD'), '123 Sesame Street', 'Main Office', 400.00, 'Complete') 
-    INTO Bookings (RentalID, CarID, CustomerID, BookingDate, MethodOfPayment, BookingStatus, StartDate, EndDate, PickupLocation, DropoffLocation, RentalPrice, RentalStatus) VALUES (5, 4, 3, TO_DATE('2024-09-15', 'YYYY-MM-DD'), 'Credit Card', 'Confirmed', TO_DATE('2024-09-22', 'YYYY-MM-DD'), TO_DATE('2024-09-29', 'YYYY-MM-DD'), '21 Jump Street', 'Main Office', 700.00, 'Future') 
+
+INSERT ALL
+    INTO Bookings (RentalID, CarID, CustomerID, BookingDate, MethodOfPayment, BookingStatus, StartDate, EndDate, PickupLocation, DropoffLocation, RentalPrice, RentalStatus) VALUES (1, 1, 1, TO_DATE('2024-09-01', 'YYYY-MM-DD'), 'Credit Card', 'Confirmed', TO_DATE('2024-09-05', 'YYYY-MM-DD'), TO_DATE('2024-09-12', 'YYYY-MM-DD'), '321 Elm Street', 'Main Office', 560.00, 'Complete')
+    INTO Bookings (RentalID, CarID, CustomerID, BookingDate, MethodOfPayment, BookingStatus, StartDate, EndDate, PickupLocation, DropoffLocation, RentalPrice, RentalStatus) VALUES (2, 2, 2, TO_DATE('2024-09-10', 'YYYY-MM-DD'), 'Debit Card', 'Confirmed', TO_DATE('2024-09-15', 'YYYY-MM-DD'), TO_DATE('2024-09-20', 'YYYY-MM-DD'), '123 Sesame Street', 'Main Office', 490.00, 'Future')
+    INTO Bookings (RentalID, CarID, CustomerID, BookingDate, MethodOfPayment, BookingStatus, StartDate, EndDate, PickupLocation, DropoffLocation, RentalPrice, RentalStatus) VALUES (3, 3, 3, TO_DATE('2024-09-20', 'YYYY-MM-DD'), 'Credit Card', 'Pending', TO_DATE('2024-09-25', 'YYYY-MM-DD'), TO_DATE('2024-09-30', 'YYYY-MM-DD'), '21 Jump Street', 'Main Office', 720.00, 'Future')
+    INTO Bookings (RentalID, CarID, CustomerID, BookingDate, MethodOfPayment, BookingStatus, StartDate, EndDate, PickupLocation, DropoffLocation, RentalPrice, RentalStatus) VALUES (4, 1, 2, TO_DATE('2024-08-28', 'YYYY-MM-DD'), 'Credit Card', 'Confirmed', TO_DATE('2024-09-01', 'YYYY-MM-DD'), TO_DATE('2024-09-05', 'YYYY-MM-DD'), '123 Sesame Street', 'Main Office', 400.00, 'Complete')
+    INTO Bookings (RentalID, CarID, CustomerID, BookingDate, MethodOfPayment, BookingStatus, StartDate, EndDate, PickupLocation, DropoffLocation, RentalPrice, RentalStatus) VALUES (5, 4, 3, TO_DATE('2024-09-15', 'YYYY-MM-DD'), 'Credit Card', 'Confirmed', TO_DATE('2024-09-22', 'YYYY-MM-DD'), TO_DATE('2024-09-29', 'YYYY-MM-DD'), '21 Jump Street', 'Main Office', 700.00, 'Future')
     INTO Bookings (RentalID, CarID, CustomerID, BookingDate, MethodOfPayment, BookingStatus, StartDate, EndDate, PickupLocation, DropoffLocation, RentalPrice, RentalStatus) VALUES (6, 2, 1, TO_DATE('2024-09-15', 'YYYY-MM-DD'), 'Credit Card', 'Confirmed', TO_DATE('2024-09-16', 'YYYY-MM-DD'), TO_DATE('2024-09-20', 'YYYY-MM-DD'), '321 Elm Street', 'Main Office', 350.00, 'In-Progress')
 SELECT * FROM dual;
 
-INSERT ALL
-    INTO Bills (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status) 
-        VALUES (1, 1, 1, '2024-09-15', '2024-09-01', 500.75, 'Paid') -- Lebron James
-    INTO Bills (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status) 
-        VALUES (2, 2, 2, '2024-10-10', '2024-09-28', 750.50, 'Unpaid') -- Stephen Curry
-    INTO Bills (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status) 
-        VALUES (3, 3, 3, '2024-10-05', '2024-09-30', 600.00, 'Paid') -- Kevin Durant
-    INTO Bills (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status) 
-        VALUES (4, 2, 4, '2024-11-20', '2024-10-01', 320.25, 'Unpaid') -- Stephen Curry
-    INTO Bills (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status) 
-        VALUES (5, 3, 5, '2024-10-15', '2024-10-02', 425.00, 'Paid') -- Kevin Durant
+
+INSERT ALL 
+    INTO Bills (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status)
+        VALUES (1, 1, 1, TO_DATE('2024-09-15', 'YYYY-MM-DD'), TO_DATE('2024-09-01', 'YYYY-MM-DD'), 500.75, 'Paid')
+    INTO Bills (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status)
+        VALUES (2, 2, 2, TO_DATE('2024-10-10', 'YYYY-MM-DD'), TO_DATE('2024-09-28', 'YYYY-MM-DD'), 750.50, 'Unpaid')
+    INTO Bills (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status)
+        VALUES (3, 3, 3, TO_DATE('2024-10-05', 'YYYY-MM-DD'), TO_DATE('2024-09-30', 'YYYY-MM-DD'), 600.00, 'Paid')
+    INTO Bills (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status)
+        VALUES (4, 2, 4, TO_DATE('2024-11-20', 'YYYY-MM-DD'), TO_DATE('2024-10-01', 'YYYY-MM-DD'), 320.25, 'Unpaid')
+    INTO Bills (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status)
+        VALUES (5, 3, 5, TO_DATE('2024-10-15', 'YYYY-MM-DD'), TO_DATE('2024-10-02', 'YYYY-MM-DD'), 425.00, 'Paid')
 SELECT * FROM dual;
 
 INSERT ALL
-    INTO TicketBill (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status, Description, IncidentDate) 
-        VALUES (1, 1, 1, '2024-10-15', '2024-09-20', 200.00, 'Pending', 'Speeding violation', '2024-09-18') -- Lebron James
-    INTO TicketBill (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status, Description, IncidentDate) 
-        VALUES (2, 2, 2, '2024-10-20', '2024-09-25', 150.50, 'Paid', 'Parking violation', '2024-09-22') -- Stephen Curry
-    INTO TicketBill (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status, Description, IncidentDate) 
-        VALUES (3, 3, 3, '2024-11-01', '2024-10-05', 300.75, 'Overdue', 'Reckless driving', '2024-09-30') -- Kevin Durant
-    INTO TicketBill (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status, Description, IncidentDate) 
-        VALUES (4, 2, 4, '2024-11-10', '2024-10-10', 100.25, 'Pending', 'Seatbelt violation', '2024-10-05') -- Stephen Curry
+    INTO TicketBill (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status, Description, IncidentDate)
+        VALUES (1, 1, 1, TO_DATE('2024-10-15', 'YYYY-MM-DD'), TO_DATE('2024-09-20', 'YYYY-MM-DD'), 200.00, 'Pending', 'Speeding violation', TO_DATE('2024-09-18', 'YYYY-MM-DD'))
+    INTO TicketBill (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status, Description, IncidentDate)
+        VALUES (2, 2, 2, TO_DATE('2024-10-20', 'YYYY-MM-DD'), TO_DATE('2024-09-25', 'YYYY-MM-DD'), 150.50, 'Paid', 'Parking violation', TO_DATE('2024-09-22', 'YYYY-MM-DD'))
+    INTO TicketBill (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status, Description, IncidentDate)
+        VALUES (3, 3, 3, TO_DATE('2024-11-01', 'YYYY-MM-DD'), TO_DATE('2024-10-05', 'YYYY-MM-DD'), 300.75, 'Overdue', 'Reckless driving', TO_DATE('2024-09-30', 'YYYY-MM-DD'))
+    INTO TicketBill (BillID, CustomerID, RentalID, DueDate, IssueDate, Amount, Status, Description, IncidentDate)
+        VALUES (4, 2, 4, TO_DATE('2024-11-10', 'YYYY-MM-DD'), TO_DATE('2024-10-10', 'YYYY-MM-DD'), 100.25, 'Pending', 'Seatbelt violation', TO_DATE('2024-10-05', 'YYYY-MM-DD'))
 SELECT * FROM dual;
+
 
 exit;
 
