@@ -65,7 +65,7 @@ function Home() {
     <div>
       {/* Navigation Bar */}
       <nav className="navbar">
-        <div className="navbar-title">DBMS Dashboard</div>
+        <div className="navbar-title">Car Rental Management Dashboard</div>
         <button className="logout-btn" onClick={handleLogout}>
           Logout
         </button>
