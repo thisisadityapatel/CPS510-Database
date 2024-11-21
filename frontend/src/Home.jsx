@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function Home() {
   const navigate = useNavigate();
-  const consoleOutputMessages = useState([]);
+  const [consoleOutputMessages, setConsoleOutputMessages] = useState([]);
 
   const handleLogout = async () => {
     const url = "http://localhost:8000/logout";
@@ -28,7 +28,8 @@ function Home() {
       if (response.ok) {
         alert(`${action.replace("-", " ")} successful`);
         const result = await response.json();
-        consoleOutputMessages[1]((prevMessages) => [...prevMessages, result]);
+        console.log(JSON.stringify(result))
+        // setConsoleOutputMessages((prevMessages) => [...prevMessages, JSON.stringify(result)]);
       } else {
         alert(`${action.replace("-", " ")} failed`);
       }
@@ -55,7 +56,8 @@ function Home() {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
-        consoleOutputMessages[1]((prevMessages) => [...prevMessages, result]);
+        console.log(JSON.stringify(result))
+        //setConsoleOutputMessages((prevMessages) => [...prevMessages, JSON.stringify(result)]);
         alert("Query executed successfully");
       } else {
         alert("Query execution failed");
@@ -98,19 +100,31 @@ function Home() {
           <button onClick={handleRunQuery}>Run Query</button>
         </div>
         <div 
-        style={{
-            backgroundColor: "#1e1e1e", // Dark background
+          style={{
+            backgroundColor: "#1e1e1e", // Dark background for the container
             color: "white", // White text
-            fontSize: "12px", // Small font size
+            fontSize: "12px", // Small font size for the text
             padding: "10px",
-            height: "300px", // Adjust height as needed
-            overflowY: "scroll", // Enable vertical scrolling
-            display: "flex",
-            flexDirection: "column-reverse", // Reverse the order of items
+            height: "500px", // Set a fixed height for the scrollable area
+            width: "100%",
+            overflowY: "scroll", // Enable vertical scrolling when content overflows
           }}
         >
           {consoleOutputMessages.map((message, index) => (
-            <div key={index}>{message}</div>
+            <div 
+              key={index} 
+              style={{
+                backgroundColor: "#333", // Darker background for individual message box
+                margin: "5px 0", // Space between the individual message boxes
+                padding: "8px", // Padding inside each box
+                borderRadius: "5px", // Rounded corners for the boxes
+                wordBreak: "break-word", // Ensures long text breaks correctly
+                display: "block", // Ensure each message is displayed in its own block
+                width: "100%", // Make sure each box takes full width of the parent container
+              }}
+            >
+              {message}
+            </div>
           ))}
         </div>
       </div>
