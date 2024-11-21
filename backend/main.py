@@ -97,7 +97,7 @@ def logout():
     return {"message": x}
 
 # Endpoint to drop tables
-@app.post("/drop-tables")
+@app.get("/drop-tables")
 def drop_tables():
     # Logic to drop tables
     run_script_via_ssh("drop_tables.sh")
@@ -112,7 +112,7 @@ def create_tables():
     return {"message": "Tables created successfully."}
 
 # Endpoint to populate tables
-@app.post("/populate-tables")
+@app.get("/populate-tables")
 def populate_tables():
     # Logic to populate tables
     run_script_via_ssh("populate_tables.sh")

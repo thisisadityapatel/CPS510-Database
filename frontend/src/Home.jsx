@@ -21,7 +21,7 @@ function Home() {
   const handleAction = async (action) => {
     const url = `http://localhost:8000/${action}`;
     try {
-      const response = await fetch(url, { method: 'POST' });
+      const response = await fetch(url, { method: 'GET' });
       if (response.ok) {
         alert(`${action.replace('-', ' ')} successful`);
       } else {
