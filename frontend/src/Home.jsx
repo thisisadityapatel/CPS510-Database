@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import "./styles/Home.css";
-// import { useState } from "react";
+import { useState } from "react";
 
 function Home() {
   const navigate = useNavigate();
-  // const [consoleOutputMessages, setConsoleOutputMessages] = useState([]);
+  const [consoleOutputMessages, setConsoleOutputMessages] = useState([]);
 
   const handleLogout = async () => {
     const url = "http://localhost:8000/logout";
@@ -29,7 +29,7 @@ function Home() {
         alert(`${action.replace("-", " ")} successful`);
         const result = await response.json();
         console.log(JSON.stringify(result))
-        // setConsoleOutputMessages((prevMessages) => [...prevMessages, JSON.stringify(result)]);
+        setConsoleOutputMessages((prevMessages) => [...prevMessages, JSON.stringify(result)]);
       } else {
         alert(`${action.replace("-", " ")} failed`);
       }
@@ -57,8 +57,7 @@ function Home() {
         const result = await response.json();
         console.log(result);
         console.log(JSON.stringify(result))
-        //setConsoleOutputMessages((prevMessages) => [...prevMessages, JSON.stringify(result)]);
-        alert("Query executed successfully");
+        setConsoleOutputMessages((prevMessages) => [...prevMessages, JSON.stringify(result)]);
       } else {
         alert("Query execution failed");
       }
@@ -99,7 +98,7 @@ function Home() {
           <input type="text" id="customQuery" />
           <button onClick={handleRunQuery}>Run Query</button>
         </div>
-        {/* <div 
+        <div 
           style={{
             backgroundColor: "#1e1e1e", // Dark background for the container
             color: "white", // White text
@@ -126,7 +125,7 @@ function Home() {
               {message}
             </div>
           ))}
-        </div> */}
+        </div>
       </div>
     </div>
   );
