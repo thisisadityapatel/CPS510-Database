@@ -96,7 +96,7 @@ function Home() {
           <input type="text" id="customQuery" />
           <button onClick={handleRunQuery}>Run Query</button>
         </div>
-        <div 
+        <div
           style={{
             backgroundColor: "#1e1e1e",
             color: "white",
@@ -108,19 +108,19 @@ function Home() {
           }}
         >
           {consoleOutputMessages.reverse().map((message, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               style={{
-                backgroundColor: "#333", 
+                backgroundColor: "#333",
                 margin: "5px 0",
                 padding: "8px",
-                borderRadius: "5px", 
+                borderRadius: "5px",
                 wordBreak: "break-word",
                 display: "block",
                 width: "100%",
               }}
             >
-              {message}
+              <pre style={{ margin: 0 }}>{message}</pre>
             </div>
           ))}
         </div>
