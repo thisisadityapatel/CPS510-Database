@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import "./styles/Home.css";
 
 function Home() {
   const navigate = useNavigate();
@@ -8,70 +9,89 @@ function Home() {
     try {
       const response = await fetch(url);
       if (response.ok) {
-        navigate('/');
+        navigate("/");
       } else {
-        alert('Logout failed');
+        alert("Logout failed");
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred. Please try again.');
+      console.error("Error:", error);
+      alert("An error occurred. Please try again.");
     }
   };
 
   const handleAction = async (action) => {
     const url = `http://localhost:8000/${action}`;
     try {
-      const response = await fetch(url, { method: 'GET' });
+      const response = await fetch(url, { method: "GET" });
       if (response.ok) {
-        alert(`${action.replace('-', ' ')} successful`);
+        alert(`${action.replace("-", " ")} successful`);
       } else {
-        alert(`${action.replace('-', ' ')} failed`);
+        alert(`${action.replace("-", " ")} failed`);
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred. Please try again.');
+      console.error("Error:", error);
+      alert("An error occurred. Please try again.");
     }
   };
 
   const handleRunQuery = async () => {
-    const query = document.getElementById('customQuery').value;
+    const query = document.getElementById("customQuery").value;
     const url = "http://localhost:8000/run-query";
-    const data = { query: query };
+    const data = { query };
 
     try {
       const response = await fetch(url, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
         const result = await response.json();
         console.log(result);
-        alert('Query executed successfully');
+        alert("Query executed successfully");
       } else {
-        alert('Query execution failed');
+        alert("Query execution failed");
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred. Please try again.');
+      console.error("Error:", error);
+      alert("An error occurred. Please try again.");
     }
   };
 
   return (
     <div>
-      <h2>DBMS</h2>
-      <button onClick={handleLogout}>Logout</button>
-      <button onClick={() => handleAction('create-tables')}>Create Tables</button>
-      <button onClick={() => handleAction('drop-tables')}>Drop Tables</button>
-      <button onClick={() => handleAction('populate-tables')}>Populate Tables</button>
-      <button onClick={() => handleAction('query-tables')}>Query Tables</button>
-      <div>
-        <label htmlFor="customQuery">Custom Query:</label>
-        <input type="text" id="customQuery" />
-        <button onClick={handleRunQuery}>Run Query</button>
+      {/* Navigation Bar */}
+      <nav className="navbar">
+        <div className="navbar-title">DBMS Dashboard</div>
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
+      </nav>
+
+      {/* Main Content */}
+      <div className="home-container">
+        <div className="actions">
+          <button onClick={() => handleAction("create-tables")}>
+            Create Tables
+          </button>
+          <button onClick={() => handleAction("drop-tables")}>
+            Drop Tables
+          </button>
+          <button onClick={() => handleAction("populate-tables")}>
+            Populate Tables
+          </button>
+          <button onClick={() => handleAction("query-tables")}>
+            Query Tables
+          </button>
+        </div>
+        <div className="custom-query">
+          <label htmlFor="customQuery">Custom Query:</label>
+          <input type="text" id="customQuery" />
+          <button onClick={handleRunQuery}>Run Query</button>
+        </div>
       </div>
     </div>
   );
