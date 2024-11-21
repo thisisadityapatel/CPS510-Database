@@ -99,7 +99,7 @@ function Home() {
           <input type="text" id="customQuery" />
           <button onClick={handleRunQuery}>Run Query</button>
         </div>
-        <div 
+        {/* <div 
           style={{
             backgroundColor: "#1e1e1e", // Dark background for the container
             color: "white", // White text
@@ -126,7 +126,7 @@ function Home() {
               {message}
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
