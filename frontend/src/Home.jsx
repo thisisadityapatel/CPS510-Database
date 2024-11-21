@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import "./styles/Home.css";
+import { useState } from "react";
 
 function Home() {
   const navigate = useNavigate();
+  const consoleOutputMessages = useState([]);
 
   const handleLogout = async () => {
     const url = "http://localhost:8000/logout";
@@ -25,6 +27,8 @@ function Home() {
       const response = await fetch(url, { method: "GET" });
       if (response.ok) {
         alert(`${action.replace("-", " ")} successful`);
+        const result = await response.json();
+        consoleOutputMessages[1]((prevMessages) => [...prevMessages, result]);
       } else {
         alert(`${action.replace("-", " ")} failed`);
       }
@@ -51,6 +55,7 @@ function Home() {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
+        consoleOutputMessages[1]((prevMessages) => [...prevMessages, result]);
         alert("Query executed successfully");
       } else {
         alert("Query execution failed");
