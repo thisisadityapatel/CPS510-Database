@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import "./styles/Home.css";
-import { useState } from "react";
+// import { useState } from "react";
 
 function Home() {
   const navigate = useNavigate();
-  const [consoleOutputMessages, setConsoleOutputMessages] = useState([]);
+  // const [consoleOutputMessages, setConsoleOutputMessages] = useState([]);
 
   const handleLogout = async () => {
     const url = "http://localhost:8000/logout";
