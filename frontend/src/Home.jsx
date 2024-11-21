@@ -28,7 +28,6 @@ function Home() {
       if (response.ok) {
         alert(`${action.replace("-", " ")} successful`);
         const result = await response.json();
-        console.log(JSON.stringify(result))
         setConsoleOutputMessages((prevMessages) => [...prevMessages, JSON.stringify(result)]);
       } else {
         alert(`${action.replace("-", " ")} failed`);
@@ -56,7 +55,6 @@ function Home() {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
-        console.log(JSON.stringify(result))
         setConsoleOutputMessages((prevMessages) => [...prevMessages, JSON.stringify(result)]);
       } else {
         alert("Query execution failed");
@@ -100,26 +98,26 @@ function Home() {
         </div>
         <div 
           style={{
-            backgroundColor: "#1e1e1e", // Dark background for the container
-            color: "white", // White text
-            fontSize: "12px", // Small font size for the text
+            backgroundColor: "#1e1e1e",
+            color: "white",
+            fontSize: "12px",
             padding: "10px",
-            height: "500px", // Set a fixed height for the scrollable area
+            height: "500px",
             width: "100%",
-            overflowY: "scroll", // Enable vertical scrolling when content overflows
+            overflowY: "scroll",
           }}
         >
-          {consoleOutputMessages.map((message, index) => (
+          {consoleOutputMessages.reverse().map((message, index) => (
             <div 
               key={index} 
               style={{
-                backgroundColor: "#333", // Darker background for individual message box
-                margin: "5px 0", // Space between the individual message boxes
-                padding: "8px", // Padding inside each box
-                borderRadius: "5px", // Rounded corners for the boxes
-                wordBreak: "break-word", // Ensures long text breaks correctly
-                display: "block", // Ensure each message is displayed in its own block
-                width: "100%", // Make sure each box takes full width of the parent container
+                backgroundColor: "#333", 
+                margin: "5px 0",
+                padding: "8px",
+                borderRadius: "5px", 
+                wordBreak: "break-word",
+                display: "block",
+                width: "100%",
               }}
             >
               {message}
