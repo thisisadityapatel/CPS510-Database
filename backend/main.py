@@ -154,6 +154,9 @@ def query_tables():
 # Endpoint to run a custom query
 @app.post("/custom-query")
 def query_tables(request: CustomQueryRequest):
+    print('test')
+    custom_query = request.custom_query
+    print(custom_query)
     try:
         custom_query = request.custom_query
         output = run_custom_query(custom_query)    

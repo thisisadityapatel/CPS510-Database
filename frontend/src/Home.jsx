@@ -28,7 +28,7 @@ function Home() {
       if (response.ok) {
         alert(`${action.replace("-", " ")} successful`);
         const result = await response.json();
-        setConsoleOutputMessages((prevMessages) => [...prevMessages, JSON.stringify(result)]);
+        setConsoleOutputMessages((prevMessages) => [...prevMessages, result['message']]);
       } else {
         alert(`${action.replace("-", " ")} failed`);
       }
@@ -40,8 +40,8 @@ function Home() {
 
   const handleRunQuery = async () => {
     const query = document.getElementById("customQuery").value;
-    const url = "http://localhost:8000/run-query";
-    const data = { query };
+    const url = "http://localhost:8000/custom-query";
+    const data = { custom_query: query };
 
     try {
       const response = await fetch(url, {
@@ -55,7 +55,7 @@ function Home() {
       if (response.ok) {
         const result = await response.json();
         console.log(result);
-        setConsoleOutputMessages((prevMessages) => [...prevMessages, JSON.stringify(result)]);
+        setConsoleOutputMessages((prevMessages) => [...prevMessages, result['message']]);
       } else {
         alert("Query execution failed");
       }
