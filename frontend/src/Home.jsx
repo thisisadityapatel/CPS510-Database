@@ -97,6 +97,22 @@ function Home() {
           <input type="text" id="customQuery" />
           <button onClick={handleRunQuery}>Run Query</button>
         </div>
+        <div 
+        style={{
+            backgroundColor: "#1e1e1e", // Dark background
+            color: "white", // White text
+            fontSize: "12px", // Small font size
+            padding: "10px",
+            height: "300px", // Adjust height as needed
+            overflowY: "scroll", // Enable vertical scrolling
+            display: "flex",
+            flexDirection: "column-reverse", // Reverse the order of items
+          }}
+        >
+          {consoleOutputMessages.map((message, index) => (
+            <div key={index}>{message}</div>
+          ))}
+        </div>
       </div>
     </div>
   );
